@@ -1,0 +1,1 @@
+T:	coco1&coco2、aa、bb、coco2&????、cc、dd;

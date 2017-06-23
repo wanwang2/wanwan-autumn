@@ -1,0 +1,6 @@
+coco1
+	"aa" maskDown="9999"-vvvv
+	"bb" maskDown="9999"-vvvv
+coco2
+	"cc" maskDown="9999"-vvvv
+	"dd" maskDown="9999"-vvvv
