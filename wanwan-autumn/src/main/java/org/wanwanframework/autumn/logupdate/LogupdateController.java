@@ -9,6 +9,11 @@ import org.wanwanframwork.file.FileUtil;
 import org.wanwanframwork.file.Log;
 import org.wanwanframwork.file.core.FileController;
 
+/**
+ * 修饰log日志信息的Controller
+ * @author coco
+ *
+ */
 public class LogupdateController extends FileController<List<String>>{
 
 	protected String method;
