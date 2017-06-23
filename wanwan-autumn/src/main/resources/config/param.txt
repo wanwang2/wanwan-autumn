@@ -1,0 +1,2 @@
+@mybatis:	import@datasource;
+@tx:	import@mybatis;
