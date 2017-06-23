@@ -14,8 +14,11 @@ public class PatternConfig {
     public static final String argsPattern = "(" + argPatternZero + "|" + argPatternDynamic + "|" + argPatternOne + "|" + argPatternMulti + ")";
 
     // 方法签名的正则
-    public static final String methodSignaturePattern = "(public|protected|private)( static)?( final)? " +
-            typePattern + " " + namePattern + "\\(" + argsPattern + "\\)";
+    public static final String methodSignaturePattern = "(public|protected|private)?(\\s+static)?(\\s+final)?\\s*" +
+            typePattern + "\\s+" + namePattern + "\\(\\s*" + argsPattern + "\\s*\\)";
+    
+    // 方法识别的正则
+    public static final String methodName = namePattern + "\\(\\s*" + argsPattern + "\\s*\\)";
     
     public static void main(String[] args) {
     	 // 每个部分的正则测试
@@ -34,6 +37,8 @@ public class PatternConfig {
         // 这里为了不使正则变得太难懂，直接只用了一个空格.
         //System.out.println(methodSignaturePattern);
         System.out.println("public void foo(...)".matches(methodSignaturePattern));
+        System.out.println("void foo(...)".matches(methodSignaturePattern));
+        System.out.println("void foo(int a )".matches(methodSignaturePattern));
         System.out.println("public List<Integer> foo(String name, Set<Double> values, ...)".matches(methodSignaturePattern));
 	}
 }
