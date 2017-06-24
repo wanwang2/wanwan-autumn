@@ -12,4 +12,12 @@ public class LogupdateTestController extends LogupdateController{
 			Log.error("error", this.getClass());
 		}
 	}
+	
+	public void getContent2() {
+		try {
+			
+		} catch (Exception e) {
+			Log.error("error", this.getClass());
+		}
+	}
 }
