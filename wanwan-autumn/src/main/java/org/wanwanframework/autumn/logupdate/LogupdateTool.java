@@ -8,6 +8,7 @@ import org.wanwanframwork.file.Log;
 public class LogupdateTool {
 
 	public static String getMatch(String content, String regex) {
+		content = content.replace("[]", "");
 		if(content == null) {
 			return null;
 		}
@@ -31,9 +32,9 @@ public class LogupdateTool {
 	}
 	
 	public static void main(String[] args) {
-		Log.log(getMatch("int a", PatternConfig.typePattern));
+		Log.log(getMatch("int[] a", PatternConfig.typePattern));
 		Log.log(getMatch("public static String getMatch(String content, String regex) { ", PatternConfig.methodSignaturePattern));
 		Log.log(getMethod("public static String getMatch(String content, String regex) { "));
-		Log.log(getMethod("public int a(int b)"));
+		Log.log(getMethod("public int[] a(int b)"));
 	}
 }

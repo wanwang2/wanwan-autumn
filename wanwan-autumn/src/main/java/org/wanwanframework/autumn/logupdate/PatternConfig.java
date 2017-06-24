@@ -9,7 +9,7 @@ public class PatternConfig {
     public static final String argPatternZero = "";       // 无参数
     public static final String argPatternDynamic = "..."; // 动态参数
     public static final String argPattern = typePattern + " " + namePattern;                     // 一个参数
-    public static final String argPatternOne = argPattern + "(, ...)?";                          // 一个参数 ＋ 动态参数
+    public static final String argPatternOne = argPattern + "(,\\s*...)?";                          // 一个参数 ＋ 动态参数
     public static final String argPatternMulti = argPattern + "(, " + argPattern + ")*(, ...)?"; // 多个参数 ＋ 动态参数
     public static final String argsPattern = "(" + argPatternZero + "|" + argPatternDynamic + "|" + argPatternOne + "|" + argPatternMulti + ")";
 
@@ -26,7 +26,8 @@ public class PatternConfig {
         System.out.println("".matches(argPatternZero));
         System.out.println("...".matches(argPatternDynamic));
         //System.out.println(argPatternOne);
-        System.out.println("int age".matches(argPatternOne));
+        System.out.println("int age,...".matches(argPatternOne));
+        System.out.println("int age, ...".matches(argPatternOne));
         //System.out.println(argPatternMulti);
         System.out.println("int age, List<Integer> values".matches(argPatternMulti));
         System.out.println("int age, List<Integer> values, ...".matches(argsPattern));
