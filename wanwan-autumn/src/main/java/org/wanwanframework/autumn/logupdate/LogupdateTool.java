@@ -8,10 +8,10 @@ import org.wanwanframwork.file.Log;
 public class LogupdateTool {
 
 	public static String getMatch(String content, String regex) {
-		content = content.replace("[]", "");
 		if(content == null) {
 			return null;
 		}
+		content = content.replace("[]", "");
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(content);
 		if(m.find()) {
