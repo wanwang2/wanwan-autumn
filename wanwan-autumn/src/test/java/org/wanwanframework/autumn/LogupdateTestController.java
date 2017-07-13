@@ -5,11 +5,17 @@ import org.wanwanframwork.file.Log;
 
 public class LogupdateTestController extends LogupdateController{
 
+	@Override
+	protected void process() {
+		getContent();
+	}
+	
 	public void getContent() {
 		try {
-			
+			@SuppressWarnings("unused")
+			int i = 9 /0;
 		} catch (Exception e) {
-			Log.error("error", this.getClass());
+			Log.error("error", e);
 		}
 	}
 	
@@ -17,7 +23,11 @@ public class LogupdateTestController extends LogupdateController{
 		try {
 			
 		} catch (Exception e) {
-			Log.error("error", this.getClass());
+			Log.error("error", e);
 		}
+	}
+	
+	public static void main(String[] args) {
+		LogupdateTestController.call(new LogupdateTestController());
 	}
 }
