@@ -20,15 +20,33 @@ public class LogupdateTool {
 		return null;
 	}
 	
+	public static String getMatchByRegexs(String content, String[] regex) {
+		String match = content;
+		for (String string : regex) {
+			match = getMatch(match, string);
+		}
+		return match;
+	}
+	
+	
 	/**
 	 * 获取方法名
 	 * @param content
 	 * @return
 	 */
 	public static String getMethod(String content) {
-		String match = getMatch(content, PatternConfig.methodSignaturePattern);
-		String method = getMatch(match, PatternConfig.methodName);
-		return getMatch(method, PatternConfig.namePattern);
+		return getMatchByRegexs(content, new String[]{
+				PatternConfig.methodSignaturePattern,
+				PatternConfig.methodName,
+				PatternConfig.namePattern});
+	}
+	
+	public static String getKey(String content, String regex) {
+		return getMatchByRegexs(content, new String[]{regex, "\"\\S+\""});
+	}
+	
+	public static String getValue(String content) {
+		return getMatchByRegexs(content, new String[]{"\\,\\s*\\S+\\s*map", "\"\\S+\""});
 	}
 	
 	public static void main(String[] args) {
@@ -36,5 +54,8 @@ public class LogupdateTool {
 		Log.log(getMatch("public static String getMatch(String content, String regex) { ", PatternConfig.methodSignaturePattern));
 		Log.log(getMethod("public static String getMatch(String content, String regex) { "));
 		Log.log(getMethod("public int[] a(int b)"));
+		
+		Log.log("field:" + getKey("put(\"vv\", \".....................\", map);", "put\\(\\S+\\,"));
+		Log.log("value:" + getValue("put(\"vv\", \".....................\", map);"));
 	}
 }

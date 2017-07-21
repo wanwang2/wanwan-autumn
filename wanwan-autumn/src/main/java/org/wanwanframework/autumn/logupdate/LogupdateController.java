@@ -60,18 +60,10 @@ public class LogupdateController extends FileController<List<String>>{
 		String errorRegex = value[0];
 		if(line.contains(errorRegex)) {
 			line = line.replace(errorRegex, value[1]);
-			line = line.replace("@", word);
-		}
-		return line;
-	}
-	
-	protected String processErrorLine(String line, String word) {
-		String[] value = configController.getCore().get("put").split(",");
-		Log.log(value);
-		String errorRegex = value[0];
-		if(line.contains(errorRegex)) {
-			line = line.replace(errorRegex, value[1]);
-			line = line.replace("@", word);
+			line = line.replace("@word", word);
+			if(value.length > 2) {
+				line = line.replace(");", "," + value[2] + ");");
+			}
 		}
 		return line;
 	}
