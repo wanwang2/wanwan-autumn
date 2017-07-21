@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.wanwanframework.file.config.ConfigController;
 import org.wanwanframwork.file.FileUtil;
 import org.wanwanframwork.file.Log;
 import org.wanwanframwork.file.core.FileController;
@@ -17,6 +18,7 @@ import org.wanwanframwork.file.core.FileController;
 public class LogupdateController extends FileController<List<String>>{
 
 	protected String method;
+	protected ConfigController configController = new ConfigController(LogupdateController.class);
 	
 	public LogupdateController() {
 		core = Arrays.asList(FileUtil.readFile("./src/test/java/org/wanwanframework/autumn/LogupdateTestController.java").split("\r\n"));
@@ -25,7 +27,7 @@ public class LogupdateController extends FileController<List<String>>{
 	@Override
 	protected void process() {
 		List<String> list = new ArrayList<String>();
-		core.stream().forEach(line -> {
+		core.forEach(line -> {
 			
 			String localMethod = processLine(line);
 			if(localMethod != null) {
@@ -48,9 +50,11 @@ public class LogupdateController extends FileController<List<String>>{
 	}
 	
 	protected String processErrorLine(String line, String word) {
-		String errorRegex = "Log.error(\"error\"";
+		String[] value = configController.getCore().get("error").split(",");
+		Log.log(value);
+		String errorRegex = value[0];
 		if(line.contains(errorRegex)) {
-			line = line.replace(errorRegex, "Log.error(\"@ error\"");
+			line = line.replace(errorRegex, value[1]);
 			line = line.replace("@", word);
 		}
 		return line;
