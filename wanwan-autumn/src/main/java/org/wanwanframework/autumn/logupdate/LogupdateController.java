@@ -17,8 +17,9 @@ import org.wanwanframwork.file.core.FileController;
  */
 public class LogupdateController extends FileController<List<String>>{
 
-	protected String method;
 	protected ConfigController configController = new ConfigController(LogupdateController.class);
+	protected String method;
+	protected String lineCache;
 	
 	public LogupdateController() {
 		core = Arrays.asList(FileUtil.readFile("./src/test/java/org/wanwanframework/autumn/LogupdateTestController.java").split("\r\n"));
@@ -34,8 +35,11 @@ public class LogupdateController extends FileController<List<String>>{
 				method = localMethod;
 			}
 			if(method != null) {
-				list.add(processErrorLine(line, method, "error"));
-				list.add(processErrorLine(line, method));
+				lineCache = line;
+				configController.getCore().forEach((k, v)->{
+					lineCache = processErrorLine(lineCache, method, k);
+				});
+				list.add(lineCache);
 			} else {
 				list.add(line);
 			}

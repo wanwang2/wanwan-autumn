@@ -1,2 +1,2 @@
 error:	Log.error("error",Log.error("@ error";
-put:	vv,vv;
+put:	map.put,.............map.put;
