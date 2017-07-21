@@ -18,8 +18,8 @@ public class LogupdateTestController extends LogupdateController{
 			@SuppressWarnings("unused")
 			int i = 9 /0;
 			Map<String, String> map = new HashMap<String, String>();
-			map.put("vv", ".....................");
-			map.put("cc", ".....................");
+			put("vv", ".....................", map);
+			put("cc", ".....................", map);
 			Log.log(map);
 		} catch (Exception e) {
 			Log.error("error", e);
@@ -35,6 +35,10 @@ public class LogupdateTestController extends LogupdateController{
 		} catch (Exception e) {
 			Log.error("error", e);
 		}
+	}
+	
+	protected void put(String key, String value, Map<String, String> map) {
+		map.put(key, value);
 	}
 	
 	public static void main(String[] args) {
