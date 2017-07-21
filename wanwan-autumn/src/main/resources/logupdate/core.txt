@@ -1,2 +1,2 @@
-error:	Log.error("error",Log.error("@ error";
-put:	map.put,.............map.put;
+error:	Log.error("error",Log.error("@word error";
+put:	map.put,put, map;
