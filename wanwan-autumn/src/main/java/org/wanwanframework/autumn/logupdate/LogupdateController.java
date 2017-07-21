@@ -34,7 +34,7 @@ public class LogupdateController extends FileController<List<String>>{
 				method = localMethod;
 			}
 			if(method != null) {
-				list.add(processErrorLine(line, method));
+				list.add(processErrorLine(line, method, "error"));
 			} else {
 				list.add(line);
 			}
@@ -49,8 +49,8 @@ public class LogupdateController extends FileController<List<String>>{
 		return method;
 	}
 	
-	protected String processErrorLine(String line, String word) {
-		String[] value = configController.getCore().get("error").split(",");
+	protected String processErrorLine(String line, String word, String configKey) {
+		String[] value = configController.getCore().get(configKey).split(",");
 		Log.log(value);
 		String errorRegex = value[0];
 		if(line.contains(errorRegex)) {
