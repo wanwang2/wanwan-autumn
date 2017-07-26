@@ -3464,3 +3464,46 @@ public class LogupdateTestController extends LogupdateController{
 2017-07-26 16:18:48,689 521  [main] INFO  org.wanwanframwork.file.Log - java.io.FileNotFoundException: . (拒绝访问。)
 2017-07-26 16:18:48,694 526  [main] INFO  org.wanwanframwork.file.Log - content:
 vvvv
+2017-07-26 20:34:08,665 435  [main] INFO  org.wanwanframwork.file.Log - java.io.FileNotFoundException: .\src\main\resources\config\core.txt (系统找不到指定的路径。)
+2017-07-26 20:34:08,732 502  [main] INFO  org.wanwanframwork.file.Log - package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface EmailIdDao {
+
+	public Long getEmailId();
+}
+2017-07-26 20:34:08,733 503  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-07-26 20:35:43,517 328  [main] INFO  org.wanwanframwork.file.Log - package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface Email,EntityIdDao {
+
+	public Long getEmail,EntityId();
+}
+2017-07-26 20:35:43,523 334  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-07-26 20:52:58,499 498  [main] INFO  org.wanwanframwork.file.Log - package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface EmailIdDao {
+
+	public Long getEmailId();
+}
+2017-07-26 20:52:58,506 505  [main] INFO  org.wanwanframwork.file.Log - package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface EntityIdDao {
+
+	public Long getEntityId();
+}
+2017-07-26 20:52:58,528 527  [main] INFO  org.wanwanframwork.file.Log - content:
+

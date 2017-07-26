@@ -1,0 +1,9 @@
+package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface @ModeIdDao {
+
+	public Long get@ModeId();
+}
