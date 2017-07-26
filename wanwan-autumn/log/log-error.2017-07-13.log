@@ -1,0 +1,14 @@
+22:59:28.232 520  [main] ERROR org.wanwanframwork.file.Log - error
+java.lang.ArithmeticException: / by zero
+	at org.wanwanframework.autumn.LogupdateTestController.getContent(LogupdateTestController.java:15) [test-classes/:na]
+	at org.wanwanframework.autumn.LogupdateTestController.process(LogupdateTestController.java:10) [test-classes/:na]
+	at org.wanwanframwork.file.core.FileController.init(FileController.java:22) [classes/:na]
+	at org.wanwanframwork.file.core.FileController.call(FileController.java:34) [classes/:na]
+	at org.wanwanframework.autumn.LogupdateTestController.main(LogupdateTestController.java:30) [test-classes/:na]
+23:00:08.253 516  [main] ERROR org.wanwanframwork.file.Log - error
+java.lang.ArithmeticException: / by zero
+	at org.wanwanframework.autumn.LogupdateTestController.getContent(LogupdateTestController.java:15) [test-classes/:na]
+	at org.wanwanframework.autumn.LogupdateTestController.process(LogupdateTestController.java:10) [test-classes/:na]
+	at org.wanwanframwork.file.core.FileController.init(FileController.java:22) [classes/:na]
+	at org.wanwanframwork.file.core.FileController.call(FileController.java:34) [classes/:na]
+	at org.wanwanframework.autumn.LogupdateTestController.main(LogupdateTestController.java:30) [test-classes/:na]
