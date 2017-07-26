@@ -3461,3 +3461,6 @@ public class LogupdateTestController extends LogupdateController{
 }
 2017-07-21 23:37:18,048 674  [main] INFO  org.wanwanframwork.file.Log - content:
 
+2017-07-26 16:18:48,689 521  [main] INFO  org.wanwanframwork.file.Log - java.io.FileNotFoundException: . (拒绝访问。)
+2017-07-26 16:18:48,694 526  [main] INFO  org.wanwanframwork.file.Log - content:
+vvvv
