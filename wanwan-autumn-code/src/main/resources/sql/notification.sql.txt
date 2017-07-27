@@ -1,0 +1,57 @@
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
