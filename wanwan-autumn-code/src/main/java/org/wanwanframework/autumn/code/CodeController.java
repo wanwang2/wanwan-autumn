@@ -1,6 +1,5 @@
 package org.wanwanframework.autumn.code;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -11,6 +10,9 @@ import org.wanwanframwork.file.FileUtil;
 import org.wanwanframwork.file.Log;
 import org.wanwanframwork.file.core.FileController;
 
+/**
+ * context/core.txt
+ */
 public class CodeController extends FileController<List<String>>{
 
 	protected ConfigController configController = new ConfigController("./src/main/resources/context/core.txt");
@@ -36,11 +38,7 @@ public class CodeController extends FileController<List<String>>{
 		String lines = StringUtils.join(lineList, "\r\n");
 		Log.log(lines);
 		String path = "./src/main/resources/template/@ModeDao.java.txt".replace("@ModeDao", key);
-		try {
-			FileUtil.createFile(path, lines);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		FileUtil.createFile(path, lines);
 	}
 	
 	public static void main(String[] args) {
