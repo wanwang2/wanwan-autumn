@@ -1,0 +1,24 @@
+package template;
+
+import org.springframework.stereotype.Component;
+import org.wanwanframework.coco.partition.persistent.DAO;
+import org.wanwanframework.coco.partition.persistent.EmailDao;
+
+/**
+ * EmailDao dao = session.getMapper(EmailDao.class);
+ * System.out.println(dao.getEmail());
+ * 
+ * @author coco
+ *
+ */
+@Component
+public class EmailDaoImpl extends DAO<Long> implements EmailDao {
+
+	private static final String GET_Email = "EmailDao.getEmail";
+
+	@Override
+	public Long getEmail() {
+		return get(GET_Email);
+	}
+
+}
