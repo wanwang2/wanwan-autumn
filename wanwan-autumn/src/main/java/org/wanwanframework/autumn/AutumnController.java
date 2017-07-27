@@ -1,7 +1,6 @@
 package org.wanwanframework.autumn;
 
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -64,11 +63,7 @@ public class AutumnController extends FileController<Map<String, String>>{
 			content = filterList(content, filterLine, mask);
 		}
 
-		try {
-			FileUtil.createFile(dir + "/filter/" + templateCode + ".txt", content);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		FileUtil.createFile(dir + "/filter/" + templateCode + ".txt", content);
 		this.content = content;
 	}
 	
