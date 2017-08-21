@@ -18,7 +18,7 @@ public class SqlController extends FileController<String>{
 	protected String sqlField;
 	
 	public SqlController() {
-		core = FileUtil.readFile("./src/main/resources/sql/notification.sql.txt", "utf-8");
+		core = FileUtil.readFile("./src/main/resources/sql/notification_template.sql.txt", "utf-8");
 	}
 	
 	@Override
