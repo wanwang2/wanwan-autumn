@@ -15,7 +15,7 @@ public class SqlTool {
 		Map map = getTypeMap(contents[1]);
 		Log.log(map);
 		String[] comments = content.split("-- Add comments to the columns|-- Create/Recreate");
-		Map comment = getCommentMap(comments[1]);
+		Map comment = getCommentMap(comments[1], "comment on column NOTIFICATION_TEMPLATE.");
 		Log.log(comment);
 		Sql sql = new Sql(map, comment);
 		Log.log(sql.toLine());
@@ -30,8 +30,8 @@ public class SqlTool {
 		return map;
 	}
 	
-	public static Map<String, String> getCommentMap(String field) {
-		String[] kv = field.replace("comment on column NOTIFICATION_TEMPLATE.", "")
+	public static Map<String, String> getCommentMap(String field, String filter) {
+		String[] kv = field.replace(filter, "")
 				.replace("is", "").split(";");
 		Map<String, String> map = new LinkedHashMap<>();
 		for (String string : kv) {
