@@ -6,10 +6,10 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.wanwanframework.file.config.ConfigController;
-import org.wanwanframwork.file.FileUtil;
-import org.wanwanframwork.file.Log;
-import org.wanwanframwork.file.core.FileController;
-import org.wanwanframwork.file.util.NameUtil;
+import org.wanwanframework.file.FileUtil;
+import org.wanwanframework.file.Log;
+import org.wanwanframework.file.core.FileController;
+import org.wanwanframework.file.util.NameUtil;
 
 public class SqlController extends FileController<String>{
 	

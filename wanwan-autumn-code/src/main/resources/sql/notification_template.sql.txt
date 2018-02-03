@@ -1,0 +1,77 @@
+-- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;

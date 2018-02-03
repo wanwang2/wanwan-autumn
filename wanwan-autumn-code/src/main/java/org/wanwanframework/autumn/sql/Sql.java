@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 import org.wanwanframework.file.config.ConfigController;
-import org.wanwanframwork.file.util.NameUtil;
+import org.wanwanframework.file.util.NameUtil;
 
 public class Sql {
 

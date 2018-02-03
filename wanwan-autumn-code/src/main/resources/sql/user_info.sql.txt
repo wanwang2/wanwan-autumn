@@ -1,0 +1,76 @@
+-- Create table
+create table USER_INFO
+(
+  ID        NUMBER(20) not null,
+  CODE      VARCHAR2(32),
+  NAME      VARCHAR2(128),
+  MOBILE    VARCHAR2(32),
+  EMAIL     VARCHAR2(128),
+  PASSWORD  VARCHAR2(32),
+  STATE     VARCHAR2(1),
+  CREATE_BY VARCHAR2(128),
+  CREATE_AT DATE,
+  UPDATE_BY VARCHAR2(128),
+  UPDATE_AT DATE
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 8K
+    minextents 1
+    maxextents unlimited
+  );
+-- Add comments to the columns 
+comment on column USER_INFO.CODE
+  is '英文名';
+comment on column USER_INFO.NAME
+  is '用户真名';
+comment on column USER_INFO.MOBILE
+  is '手机号';
+comment on column USER_INFO.EMAIL
+  is '邮件地址';
+comment on column USER_INFO.PASSWORD
+  is '密码';
+comment on column USER_INFO.STATE
+  is '状态';
+comment on column USER_INFO.CREATE_BY
+  is '创建人';
+comment on column USER_INFO.CREATE_AT
+  is '创建时间';
+comment on column USER_INFO.UPDATE_BY
+  is '修改人';
+comment on column USER_INFO.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table USER_INFO
+  add constraint PK_USER_INFO primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );
+alter table USER_INFO
+  add constraint UK_USER_INFO_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255
+  storage
+  (
+    initial 64K
+    next 1M
+    minextents 1
+    maxextents unlimited
+  );

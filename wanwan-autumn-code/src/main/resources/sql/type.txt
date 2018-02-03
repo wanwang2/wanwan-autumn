@@ -1,0 +1,5 @@
+NUMBER:	long;
+VARCHAR2:	String;
+NVARCHAR2:	String;
+DATE:	Date;
+CLOB:	String;

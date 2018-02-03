@@ -4,8 +4,8 @@ import java.io.File;
 import java.util.Arrays;
 
 import org.apache.commons.lang3.StringUtils;
-import org.wanwanframwork.file.core.FileArrayController;
-import org.wanwanframwork.file.core.FileController;
+import org.wanwanframework.file.core.FileArrayController;
+import org.wanwanframework.file.core.FileController;
 
 public class CodeLoopController extends FileController<File[]>{
 

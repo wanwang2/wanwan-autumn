@@ -3,8 +3,8 @@ package org.wanwanframework.autumn.sql;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.wanwanframwork.file.FileUtil;
-import org.wanwanframwork.file.Log;
+import org.wanwanframework.file.FileUtil;
+import org.wanwanframework.file.Log;
 
 public class SqlTool {
 

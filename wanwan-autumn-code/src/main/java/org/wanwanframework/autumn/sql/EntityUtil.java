@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.wanwanframwork.file.FileReader;
+import org.wanwanframework.file.FileReader;
 
 /**
  * 提供从sql-create 语句到entity之间的转换

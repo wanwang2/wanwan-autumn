@@ -12,7 +12,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<spring.version>4.3.10.RELEASE</spring.version>
+		<spring.version>4.3.8.RELEASE</spring.version>
 	</properties>
 
 	<dependencies>
@@ -27,21 +27,9 @@
 		<dependency>
 			<groupId>org.wanwanframework.file</groupId>
 			<artifactId>wanwan-file</artifactId>
-			<version>0.0.1</version>
+			<version>1.0.1</version>
 		</dependency>
 
-		<dependency>
-			<groupId>org.wanwanframework.file.map</groupId>
-			<artifactId>wanwan-file-map</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>org.wanwanframework.file.poi</groupId>
-			<artifactId>wanwan-file-poi</artifactId>
-			<version>0.0.1</version>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.wanwanframework.file.config</groupId>
 			<artifactId>wanwan-file-config</artifactId>
@@ -89,13 +77,7 @@
 			<artifactId>quartz</artifactId>
 			<version>2.2.2</version>
 		</dependency>
-		
-		<dependency>
-			<groupId>oracle</groupId>
-			<artifactId>ojdbc</artifactId>
-			<version>6</version>
-		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 			<groupId>org.mybatis</groupId>

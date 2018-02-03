@@ -3899,3 +3899,1969 @@ public class EntityDaoImpl extends DAO<Long> implements EntityDao {
 }
 2017-07-27 20:05:58,122 345  [main] INFO  org.wanwanframwork.file.Log - content:
 .\src\main\resources\template\@ModeDao.java.txt,.\src\main\resources\template\@ModeDaoImpl.java.txt
+2017-07-27 21:17:27,144 499  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:19:54,984 380  [main] INFO  org.wanwanframwork.file.Log - ->-- Create table
+2017-07-27 21:19:54,988 384  [main] INFO  org.wanwanframwork.file.Log - ->create table NOTIFICATION
+2017-07-27 21:19:54,988 384  [main] INFO  org.wanwanframwork.file.Log - ->
+2017-07-27 21:19:54,988 384  [main] INFO  org.wanwanframwork.file.Log - ->
+2017-07-27 21:19:54,988 384  [main] INFO  org.wanwanframwork.file.Log - ->  ID               NUMBER
+2017-07-27 21:19:54,988 384  [main] INFO  org.wanwanframwork.file.Log - ->20) not null,
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->  ALARM_CODE       VARCHAR2
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->32) not null,
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->  MESSAGE          CLOB,
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->  TYPE             VARCHAR2
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->32),
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->  EMAIL_ATTACHMENT VARCHAR2
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->2000) not null,
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->  HAS_SENT         VARCHAR2
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->1) default 0,
+2017-07-27 21:19:54,989 385  [main] INFO  org.wanwanframwork.file.Log - ->  NOTIFY_TIME      DATE,
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->  CREATE_BY        VARCHAR2
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->128) not null,
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->  CREATE_AT        DATE not null,
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->  UPDATE_BY        VARCHAR2
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->128) not null,
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->  UPDATE_AT        DATE not null
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->)
+2017-07-27 21:19:54,990 386  [main] INFO  org.wanwanframwork.file.Log - ->tablespace COCO_DATA
+2017-07-27 21:19:54,991 387  [main] INFO  org.wanwanframwork.file.Log - ->  pctfree 10
+2017-07-27 21:19:54,991 387  [main] INFO  org.wanwanframwork.file.Log - ->  initrans 1
+2017-07-27 21:19:54,992 388  [main] INFO  org.wanwanframwork.file.Log - ->  maxtrans 255;
+2017-07-27 21:19:54,993 389  [main] INFO  org.wanwanframwork.file.Log - ->-- Add comments to the table 
+2017-07-27 21:19:54,993 389  [main] INFO  org.wanwanframwork.file.Log - ->comment on table NOTIFICATION
+2017-07-27 21:19:54,994 390  [main] INFO  org.wanwanframwork.file.Log - ->  is '通知信息表';
+2017-07-27 21:19:54,994 390  [main] INFO  org.wanwanframwork.file.Log - ->-- Add comments to the columns 
+2017-07-27 21:19:54,994 390  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.ALARM_CODE
+2017-07-27 21:19:54,994 390  [main] INFO  org.wanwanframwork.file.Log - ->  is '告警编码';
+2017-07-27 21:19:54,995 391  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.MESSAGE
+2017-07-27 21:19:54,995 391  [main] INFO  org.wanwanframwork.file.Log - ->  is '通知内容';
+2017-07-27 21:19:54,995 391  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.TYPE
+2017-07-27 21:19:54,995 391  [main] INFO  org.wanwanframwork.file.Log - ->  is '通知类型';
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.EMAIL_ATTACHMENT
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->  is '通知附件';
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.HAS_SENT
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->  is '是否已发送：0-未发送；1-已发送';
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.NOTIFY_TIME
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->  is '发送时间';
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.CREATE_BY
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->  is '创建人';
+2017-07-27 21:19:54,996 392  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.CREATE_AT
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->  is '创建时间';
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.UPDATE_BY
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->  is '修改人';
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->comment on column NOTIFICATION.UPDATE_AT
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->  is '修改时间';
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->-- Create/Recreate primary, unique and foreign key constraints 
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->alter table NOTIFICATION
+2017-07-27 21:19:54,997 393  [main] INFO  org.wanwanframwork.file.Log - ->  add constraint PK_NOTIFICATION primary key 
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->ID)
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->  using index 
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->  tablespace COCO_DATA
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->  pctfree 10
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->  initrans 2
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->  maxtrans 255;
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->-- Create/Recreate indexes 
+2017-07-27 21:19:54,998 394  [main] INFO  org.wanwanframwork.file.Log - ->create index IDX_NOTIFICATION_CODE on NOTIFICATION 
+2017-07-27 21:19:54,999 395  [main] INFO  org.wanwanframwork.file.Log - ->ALARM_CODE)
+2017-07-27 21:19:54,999 395  [main] INFO  org.wanwanframwork.file.Log - ->  tablespace COCO_DATA
+2017-07-27 21:19:54,999 395  [main] INFO  org.wanwanframwork.file.Log - ->  pctfree 10
+2017-07-27 21:19:54,999 395  [main] INFO  org.wanwanframwork.file.Log - ->  initrans 2
+2017-07-27 21:19:54,999 395  [main] INFO  org.wanwanframwork.file.Log - ->  maxtrans 255;
+2017-07-27 21:19:55,000 396  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:24:39,765 419  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+
+2017-07-27 21:24:39,769 423  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:30:47,142 379  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+
+2017-07-27 21:32:46,653 401  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+
+2017-07-27 21:32:46,659 407  [main] INFO  org.wanwanframwork.file.Log - map:{MESSAGE=null, TYPE=null, NOTIFY_TIME=null}
+2017-07-27 21:32:46,659 407  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:33:07,769 482  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+
+2017-07-27 21:34:34,732 494  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:34:34,740 502  [main] INFO  org.wanwanframwork.file.Log - map:{ID=null, ALARM_CODE=null, MESSAGE=null, TYPE=null, EMAIL_ATTACHMENT=null, NOTIFY_TIME=null, CREATE_BY=null, CREATE_AT=null, UPDATE_BY=null, UPDATE_AT=null}
+2017-07-27 21:34:34,740 502  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:36:02,557 443  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:36:39,754 382  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:36:39,770 398  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=null, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:36:39,771 399  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:37:21,574 416  [main] INFO  org.wanwanframwork.file.Log - java.io.FileNotFoundException: .\src\main\resources\sql.txt (系统找不到指定的文件。)
+2017-07-27 21:37:36,115 369  [main] INFO  org.wanwanframwork.file.Log - java.io.FileNotFoundException: .\src\main\resources\sql.txt (系统找不到指定的文件。)
+2017-07-27 21:38:13,098 396  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:38:13,112 410  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:38:13,113 411  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:47:38,568 388  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:47:38,581 401  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:47:38,625 445  [main] INFO  org.wanwanframwork.file.Log - list:[private int ID;, private String ALARM_CODE;, private String MESSAGE;, private String TYPE;, private String EMAIL_ATTACHMENT;, private Date NOTIFY_TIME;, private String CREATE_BY;, private Date CREATE_AT;, private String UPDATE_BY;, private Date UPDATE_AT;]
+2017-07-27 21:47:38,625 445  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:48:10,489 386  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:48:10,503 400  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:48:10,551 448  [main] INFO  org.wanwanframwork.file.Log - list:private int ID;
+private String ALARM_CODE;
+private String MESSAGE;
+private String TYPE;
+private String EMAIL_ATTACHMENT;
+private Date NOTIFY_TIME;
+private String CREATE_BY;
+private Date CREATE_AT;
+private String UPDATE_BY;
+private Date UPDATE_AT;
+2017-07-27 21:48:10,551 448  [main] INFO  org.wanwanframwork.file.Log - content:
+-- Create table
+create table NOTIFICATION
+(
+  ID               NUMBER(20) not null,
+  ALARM_CODE       VARCHAR2(32) not null,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) not null,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) not null,
+  CREATE_AT        DATE not null,
+  UPDATE_BY        VARCHAR2(128) not null,
+  UPDATE_AT        DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the table 
+comment on table NOTIFICATION
+  is '通知信息表';
+-- Add comments to the columns 
+comment on column NOTIFICATION.ALARM_CODE
+  is '告警编码';
+comment on column NOTIFICATION.MESSAGE
+  is '通知内容';
+comment on column NOTIFICATION.TYPE
+  is '通知类型';
+comment on column NOTIFICATION.EMAIL_ATTACHMENT
+  is '通知附件';
+comment on column NOTIFICATION.HAS_SENT
+  is '是否已发送：0-未发送；1-已发送';
+comment on column NOTIFICATION.NOTIFY_TIME
+  is '发送时间';
+comment on column NOTIFICATION.CREATE_BY
+  is '创建人';
+comment on column NOTIFICATION.CREATE_AT
+  is '创建时间';
+comment on column NOTIFICATION.UPDATE_BY
+  is '修改人';
+comment on column NOTIFICATION.UPDATE_AT
+  is '修改时间';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION
+  add constraint PK_NOTIFICATION primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_CODE on NOTIFICATION (ALARM_CODE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-07-27 21:48:53,866 395  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:48:53,880 409  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:48:53,933 462  [main] INFO  org.wanwanframwork.file.Log - list:private int ID;
+private String ALARM_CODE;
+private String MESSAGE;
+private String TYPE;
+private String EMAIL_ATTACHMENT;
+private Date NOTIFY_TIME;
+private String CREATE_BY;
+private Date CREATE_AT;
+private String UPDATE_BY;
+private Date UPDATE_AT;
+2017-07-27 21:48:53,933 462  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-07-27 21:50:17,208 386  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:50:17,223 401  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:50:17,274 452  [main] INFO  org.wanwanframwork.file.Log - list:private int Id;
+private String alarmCode;
+private String message;
+private String type;
+private String emailAttachment;
+private Date notifyTime;
+private String createBy;
+private Date createAt;
+private String updateBy;
+private Date updateAt;
+2017-07-27 21:50:17,275 453  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-07-27 21:50:41,289 394  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:50:41,303 408  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:50:41,354 459  [main] INFO  org.wanwanframwork.file.Log - list:private int id;
+private String alarmCode;
+private String message;
+private String type;
+private String emailAttachment;
+private Date notifyTime;
+private String createBy;
+private Date createAt;
+private String updateBy;
+private Date updateAt;
+2017-07-27 21:50:41,355 460  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-07-27 21:53:09,132 391  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:53:09,159 418  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:53:09,233 492  [main] INFO  org.wanwanframwork.file.Log - list:private intalue idey
+private Stringalue alarmCodeey
+private Stringalue messageey
+private Stringalue typeey
+private Stringalue emailAttachmentey
+private Datealue notifyTimeey
+private Stringalue createByey
+private Datealue createAtey
+private Stringalue updateByey
+private Datealue updateAtey
+2017-07-27 21:53:09,233 492  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-07-27 21:53:45,400 401  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-07-27 21:53:45,416 417  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-07-27 21:53:45,479 480  [main] INFO  org.wanwanframwork.file.Log - list:private int id
+private String alarmCode
+private String message
+private String type
+private String emailAttachment
+private Date notifyTime
+private String createBy
+private Date createAt
+private String updateBy
+private Date updateAt
+2017-07-27 21:53:45,480 481  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-08-21 16:11:21,230 356  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-08-21 16:11:21,268 394  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-08-21 16:11:21,316 442  [main] INFO  org.wanwanframwork.file.Log - list:private int id
+private String alarmCode
+private String message
+private String type
+private String emailAttachment
+private Date notifyTime
+private String createBy
+private Date createAt
+private String updateBy
+private Date updateAt
+2017-08-21 16:11:21,317 443  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-08-21 16:24:59,313 341  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-08-21 16:24:59,325 353  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-08-21 16:24:59,369 397  [main] INFO  org.wanwanframwork.file.Log - list:private int id
+private String alarmCode
+private String message
+private String type
+private String emailAttachment
+private Date notifyTime
+private String createBy
+private Date createAt
+private String updateBy
+private Date updateAt
+2017-08-21 16:24:59,369 397  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-08-21 16:38:55,379 326  [main] INFO  org.wanwanframwork.file.Log - package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface EmailIdDao {
+
+	public Long getEmailId();
+}
+2017-08-21 16:38:55,385 332  [main] INFO  org.wanwanframwork.file.Log - package org.wanwanframework.coco.partition.persistent;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public interface EntityIdDao {
+
+	public Long getEntityId();
+}
+2017-08-21 16:38:55,387 334  [main] INFO  org.wanwanframwork.file.Log - package template;
+
+import org.springframework.stereotype.Component;
+import org.wanwanframework.coco.partition.persistent.DAO;
+import org.wanwanframework.coco.partition.persistent.EmailDao;
+
+/**
+ * EmailDao dao = session.getMapper(EmailDao.class);
+ * System.out.println(dao.getEmail());
+ * 
+ * @author coco
+ *
+ */
+@Component
+public class EmailDaoImpl extends DAO<Long> implements EmailDao {
+
+	private static final String GET_Email = "EmailDao.getEmail";
+
+	@Override
+	public Long getEmail() {
+		return get(GET_Email);
+	}
+
+}
+2017-08-21 16:38:55,390 337  [main] INFO  org.wanwanframwork.file.Log - package template;
+
+import org.springframework.stereotype.Component;
+import org.wanwanframework.coco.partition.persistent.DAO;
+import org.wanwanframework.coco.partition.persistent.EntityDao;
+
+/**
+ * EntityDao dao = session.getMapper(EntityDao.class);
+ * System.out.println(dao.getEntity());
+ * 
+ * @author coco
+ *
+ */
+@Component
+public class EntityDaoImpl extends DAO<Long> implements EntityDao {
+
+	private static final String GET_Entity = "EntityDao.getEntity";
+
+	@Override
+	public Long getEntity() {
+		return get(GET_Entity);
+	}
+
+}
+2017-08-21 16:38:55,391 338  [main] INFO  org.wanwanframwork.file.Log - content:
+.\src\main\resources\template\@ModeDao.java.txt,.\src\main\resources\template\@ModeDaoImpl.java.txt
+2017-08-21 16:39:30,922 331  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID               NUMBER(20) ,
+  ALARM_CODE       VARCHAR2(32) ,
+  MESSAGE          CLOB,
+  TYPE             VARCHAR2(32),
+  EMAIL_ATTACHMENT VARCHAR2(2000) ,
+  HAS_SENT         VARCHAR2(1) default 0,
+  NOTIFY_TIME      DATE,
+  CREATE_BY        VARCHAR2(128) ,
+  CREATE_AT        DATE ,
+  UPDATE_BY        VARCHAR2(128) ,
+  UPDATE_AT        DATE 
+
+2017-08-21 16:39:30,933 342  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, ALARM_CODE=String, MESSAGE=String, TYPE=String, EMAIL_ATTACHMENT=String, NOTIFY_TIME=Date, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-08-21 16:39:30,980 389  [main] INFO  org.wanwanframwork.file.Log - list:private int id
+private String alarmCode
+private String message
+private String type
+private String emailAttachment
+private Date notifyTime
+private String createBy
+private Date createAt
+private String updateBy
+private Date updateAt
+2017-08-21 16:39:30,981 390  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-08-21 16:40:04,303 329  [main] INFO  org.wanwanframwork.file.Log - sqlField:
+  ID             NUMBER(20) ,
+  CODE           VARCHAR2(32) ,
+  NAME           VARCHAR2(128) ,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB ,
+  TYPE           VARCHAR2(32) ,
+  SYSTEM_CODE    VARCHAR2(32) ,
+  IS_ENABLE      VARCHAR2(1) ,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) ,
+  CREATE_AT      DATE ,
+  UPDATE_BY      VARCHAR2(128) ,
+  UPDATE_AT      DATE 
+
+2017-08-21 16:40:04,316 342  [main] INFO  org.wanwanframwork.file.Log - map:{ID=int, CODE=String, NAME=String, SUBJECT=String, BODY=String, TYPE=String, SYSTEM_CODE=String, IS_ENABLE=String, HAS_ATTACHMENT=String, CREATE_BY=String, CREATE_AT=Date, UPDATE_BY=String, UPDATE_AT=Date}
+2017-08-21 16:40:04,359 385  [main] INFO  org.wanwanframwork.file.Log - list:private int id
+private String code
+private String name
+private String subject
+private String body
+private String type
+private String systemCode
+private String isEnable
+private String hasAttachment
+private String createBy
+private Date createAt
+private String updateBy
+private Date updateAt
+2017-08-21 16:40:04,360 386  [main] INFO  org.wanwanframwork.file.Log - content:
+
+2017-08-21 17:30:22,332 329  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 17:35:11,103 305  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 17:35:11,155 357  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 17:35:11,155 357  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 17:35:11,155 357  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 17:35:11,155 357  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 17:35:11,156 358  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:45:10,066 466  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:45:10,170 570  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:45:10,171 571  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:45:10,171 571  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:45:10,171 571  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:45:10,171 571  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:45:10,172 572  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:45:10,172 572  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:45:10,172 572  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:45:10,172 572  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:45:10,172 572  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:45:10,172 572  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:45:10,173 573  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:45:10,173 573  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:49:07,581 344  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:49:07,633 396  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:49:07,634 397  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:49:07,634 397  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:49:07,634 397  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:49:07,634 397  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:49:07,635 398  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:49:07,637 400  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:49:07,638 401  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:49:07,638 401  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:49:07,639 402  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:49:07,639 402  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:49:07,640 403  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:49:07,641 404  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:49:07,643 406  [main] INFO  org.wanwanframwork.file.Log - CODE:  '模板编码'
+2017-08-21 20:49:07,645 408  [main] INFO  org.wanwanframwork.file.Log - NAME:  '模板名'
+2017-08-21 20:49:07,645 408  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  '通知主题'
+2017-08-21 20:49:07,647 410  [main] INFO  org.wanwanframwork.file.Log - BODY:  '通知内容'
+2017-08-21 20:49:07,647 410  [main] INFO  org.wanwanframwork.file.Log - TYPE:  '通知类型(email,message)'
+2017-08-21 20:49:07,647 410  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  '归属系统'
+2017-08-21 20:49:07,647 410  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  '是否启用(0:未启用，1:启用)'
+2017-08-21 20:49:07,648 411  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  '是否允许附件'
+2017-08-21 20:49:07,649 412  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  '系统字段'
+2017-08-21 20:49:07,650 413  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  '系统字段'
+2017-08-21 20:49:07,650 413  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  '系统字段'
+2017-08-21 20:49:07,651 414  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  '系统字段'
+2017-08-21 20:49:55,628 375  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:49:55,674 421  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:49:55,674 421  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:49:55,675 422  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:49:55,675 422  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:49:55,675 422  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:49:55,675 422  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:49:55,675 422  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:49:55,675 422  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:49:55,676 423  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:49:55,676 423  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:49:55,676 423  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:49:55,676 423  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:49:55,676 423  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:49:55,678 425  [main] INFO  org.wanwanframwork.file.Log - CODE:  '模板编码'
+2017-08-21 20:49:55,678 425  [main] INFO  org.wanwanframwork.file.Log - NAME:  '模板名'
+2017-08-21 20:49:55,679 426  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  '通知主题'
+2017-08-21 20:49:55,679 426  [main] INFO  org.wanwanframwork.file.Log - BODY:  '通知内容'
+2017-08-21 20:49:55,679 426  [main] INFO  org.wanwanframwork.file.Log - TYPE:  '通知类型(email,message)'
+2017-08-21 20:49:55,680 427  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  '归属系统'
+2017-08-21 20:49:55,680 427  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  '是否启用(0:未启用，1:启用)'
+2017-08-21 20:49:55,680 427  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  '是否允许附件'
+2017-08-21 20:49:55,680 427  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  '系统字段'
+2017-08-21 20:49:55,681 428  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  '系统字段'
+2017-08-21 20:49:55,681 428  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  '系统字段'
+2017-08-21 20:49:55,681 428  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  '系统字段'
+2017-08-21 20:49:55,710 457  [main] INFO  org.wanwanframwork.file.Log - private long(20) id;//
+private String(32) code;//'模板编码'
+private String(128) name;//'模板名'
+private String(128) subject;//'通知主题'
+private String body;//'通知内容'
+private String(32) type;//'通知类型(email,message)'
+private String(32) systemCode;//'归属系统'
+private String(1) isEnable;//'是否启用(0:未启用，1:启用)'
+private String(1) hasAttachment;//'是否允许附件'
+private String(128) createBy;//'系统字段'
+private Date createAt;//'系统字段'
+private String(128) updateBy;//'系统字段'
+private Date updateAt;//'系统字段'
+2017-08-21 20:51:40,106 386  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:51:40,153 433  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:51:40,153 433  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:51:40,153 433  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:51:40,153 433  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:51:40,153 433  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:51:40,154 434  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:51:40,156 436  [main] INFO  org.wanwanframwork.file.Log - CODE:  '模板编码'
+2017-08-21 20:51:40,156 436  [main] INFO  org.wanwanframwork.file.Log - NAME:  '模板名'
+2017-08-21 20:51:40,156 436  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  '通知主题'
+2017-08-21 20:51:40,156 436  [main] INFO  org.wanwanframwork.file.Log - BODY:  '通知内容'
+2017-08-21 20:51:40,156 436  [main] INFO  org.wanwanframwork.file.Log - TYPE:  '通知类型(email,message)'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  '归属系统'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  '是否启用(0:未启用，1:启用)'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  '是否允许附件'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  '系统字段'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  '系统字段'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  '系统字段'
+2017-08-21 20:51:40,157 437  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  '系统字段'
+2017-08-21 20:51:40,188 468  [main] INFO  org.wanwanframwork.file.Log - private long(20) id;//
+private String(32) code;//'模板编码'
+private String(128) name;//'模板名'
+private String(128) subject;//'通知主题'
+private String body;//'通知内容'
+private String(32) type;//'通知类型(email,message)'
+private String(32) systemCode;//'归属系统'
+private String(1) isEnable;//'是否启用(0:未启用，1:启用)'
+private String(1) hasAttachment;//'是否允许附件'
+private String(128) createBy;//'系统字段'
+private Date createAt;//'系统字段'
+private String(128) updateBy;//'系统字段'
+private Date updateAt;//'系统字段'
+2017-08-21 20:51:56,034 321  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:51:56,080 367  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:51:56,081 368  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:51:56,081 368  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:51:56,081 368  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:51:56,081 368  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:51:56,081 368  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:51:56,081 368  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:51:56,082 369  [main] INFO  org.wanwanframwork.file.Log - CODE:  '模板编码'
+2017-08-21 20:51:56,083 370  [main] INFO  org.wanwanframwork.file.Log - NAME:  '模板名'
+2017-08-21 20:51:56,083 370  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  '通知主题'
+2017-08-21 20:51:56,083 370  [main] INFO  org.wanwanframwork.file.Log - BODY:  '通知内容'
+2017-08-21 20:51:56,084 371  [main] INFO  org.wanwanframwork.file.Log - TYPE:  '通知类型(email,message)'
+2017-08-21 20:51:56,084 371  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  '归属系统'
+2017-08-21 20:51:56,085 372  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  '是否启用(0:未启用，1:启用)'
+2017-08-21 20:51:56,086 373  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  '是否允许附件'
+2017-08-21 20:51:56,086 373  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  '系统字段'
+2017-08-21 20:51:56,086 373  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  '系统字段'
+2017-08-21 20:51:56,086 373  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  '系统字段'
+2017-08-21 20:51:56,087 374  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  '系统字段'
+2017-08-21 20:51:56,115 402  [main] INFO  org.wanwanframwork.file.Log - private long(20) id;//
+private String(32) code;//'模板编码'
+private String(128) name;//'模板名'
+private String(128) subject;//'通知主题'
+private String body;//'通知内容'
+private String(32) type;//'通知类型(email,message)'
+private String(32) systemCode;//'归属系统'
+private String(1) isEnable;//'是否启用(0:未启用，1:启用)'
+private String(1) hasAttachment;//'是否允许附件'
+private String(128) createBy;//'系统字段'
+private Date createAt;//'系统字段'
+private String(128) updateBy;//'系统字段'
+private Date updateAt;//'系统字段'
+2017-08-21 20:53:56,229 365  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:53:56,294 430  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:53:56,295 431  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:53:56,295 431  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:53:56,295 431  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:53:56,295 431  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:53:56,296 432  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:53:56,296 432  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:53:56,296 432  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:53:56,296 432  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:53:56,296 432  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:53:56,297 433  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:53:56,297 433  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:53:56,297 433  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:53:56,300 436  [main] INFO  org.wanwanframwork.file.Log - CODE:  '模板编码'
+2017-08-21 20:53:56,301 437  [main] INFO  org.wanwanframwork.file.Log - NAME:  '模板名'
+2017-08-21 20:53:56,303 439  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  '通知主题'
+2017-08-21 20:53:56,304 440  [main] INFO  org.wanwanframwork.file.Log - BODY:  '通知内容'
+2017-08-21 20:53:56,304 440  [main] INFO  org.wanwanframwork.file.Log - TYPE:  '通知类型(email,message)'
+2017-08-21 20:53:56,304 440  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  '归属系统'
+2017-08-21 20:53:56,304 440  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  '是否启用(0:未启用，1:启用)'
+2017-08-21 20:53:56,305 441  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  '是否允许附件'
+2017-08-21 20:53:56,306 442  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  '系统字段'
+2017-08-21 20:53:56,306 442  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  '系统字段'
+2017-08-21 20:53:56,307 443  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  '系统字段'
+2017-08-21 20:53:56,307 443  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  '系统字段'
+2017-08-21 20:56:12,931 412  [main] INFO  org.wanwanframwork.file.Log - -- Create table
+create table NOTIFICATION_TEMPLATE
+(
+  ID             NUMBER(20) not null,
+  CODE           VARCHAR2(32) not null,
+  NAME           VARCHAR2(128) not null,
+  SUBJECT        VARCHAR2(128),
+  BODY           CLOB not null,
+  TYPE           VARCHAR2(32) not null,
+  SYSTEM_CODE    VARCHAR2(32) not null,
+  IS_ENABLE      VARCHAR2(1) not null,
+  HAS_ATTACHMENT VARCHAR2(1),
+  CREATE_BY      VARCHAR2(128) not null,
+  CREATE_AT      DATE not null,
+  UPDATE_BY      VARCHAR2(128) not null,
+  UPDATE_AT      DATE not null
+)
+tablespace COCO_DATA
+  pctfree 10
+  initrans 1
+  maxtrans 255;
+-- Add comments to the columns 
+comment on column NOTIFICATION_TEMPLATE.CODE
+  is '模板编码';
+comment on column NOTIFICATION_TEMPLATE.NAME
+  is '模板名';
+comment on column NOTIFICATION_TEMPLATE.SUBJECT
+  is '通知主题';
+comment on column NOTIFICATION_TEMPLATE.BODY
+  is '通知内容';
+comment on column NOTIFICATION_TEMPLATE.TYPE
+  is '通知类型(email,message)';
+comment on column NOTIFICATION_TEMPLATE.SYSTEM_CODE
+  is '归属系统';
+comment on column NOTIFICATION_TEMPLATE.IS_ENABLE
+  is '是否启用(0:未启用，1:启用)';
+comment on column NOTIFICATION_TEMPLATE.HAS_ATTACHMENT
+  is '是否允许附件';
+comment on column NOTIFICATION_TEMPLATE.CREATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.CREATE_AT
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_BY
+  is '系统字段';
+comment on column NOTIFICATION_TEMPLATE.UPDATE_AT
+  is '系统字段';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table NOTIFICATION_TEMPLATE
+  add constraint PK_NOTIFICATION_TEMPLATE primary key (ID)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+alter table NOTIFICATION_TEMPLATE
+  add constraint UK_NOTIFICATION_TEMPLATE_CODE unique (CODE)
+  using index 
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+-- Create/Recreate indexes 
+create index IDX_NOTIFICATION_TEM_IS_ENABLE on NOTIFICATION_TEMPLATE (IS_ENABLE)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_NAME on NOTIFICATION_TEMPLATE (NAME)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+create index IDX_NOTIFICATION_TEM_SUBJECT on NOTIFICATION_TEMPLATE (SUBJECT)
+  tablespace COCO_DATA
+  pctfree 10
+  initrans 2
+  maxtrans 255;
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - ID:  NUMBER(20)
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - CODE:  VARCHAR2(32)
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - NAME:  VARCHAR2(128)
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  VARCHAR2(128)
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - BODY:  CLOB
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - TYPE:  VARCHAR2(32)
+2017-08-21 20:56:12,976 457  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  VARCHAR2(32)
+2017-08-21 20:56:12,977 458  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  VARCHAR2(1)
+2017-08-21 20:56:12,977 458  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  VARCHAR2(1)
+2017-08-21 20:56:12,977 458  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  VARCHAR2(128)
+2017-08-21 20:56:12,977 458  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  DATE
+2017-08-21 20:56:12,977 458  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  VARCHAR2(128)
+2017-08-21 20:56:12,977 458  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  DATE
+2017-08-21 20:56:12,979 460  [main] INFO  org.wanwanframwork.file.Log - CODE:  '模板编码'
+2017-08-21 20:56:12,979 460  [main] INFO  org.wanwanframwork.file.Log - NAME:  '模板名'
+2017-08-21 20:56:12,980 461  [main] INFO  org.wanwanframwork.file.Log - SUBJECT:  '通知主题'
+2017-08-21 20:56:12,980 461  [main] INFO  org.wanwanframwork.file.Log - BODY:  '通知内容'
+2017-08-21 20:56:12,980 461  [main] INFO  org.wanwanframwork.file.Log - TYPE:  '通知类型(email,message)'
+2017-08-21 20:56:12,980 461  [main] INFO  org.wanwanframwork.file.Log - SYSTEM_CODE:  '归属系统'
+2017-08-21 20:56:12,980 461  [main] INFO  org.wanwanframwork.file.Log - IS_ENABLE:  '是否启用(0:未启用，1:启用)'
+2017-08-21 20:56:12,981 462  [main] INFO  org.wanwanframwork.file.Log - HAS_ATTACHMENT:  '是否允许附件'
+2017-08-21 20:56:12,981 462  [main] INFO  org.wanwanframwork.file.Log - CREATE_BY:  '系统字段'
+2017-08-21 20:56:12,981 462  [main] INFO  org.wanwanframwork.file.Log - CREATE_AT:  '系统字段'
+2017-08-21 20:56:12,981 462  [main] INFO  org.wanwanframwork.file.Log - UPDATE_BY:  '系统字段'
+2017-08-21 20:56:12,982 463  [main] INFO  org.wanwanframwork.file.Log - UPDATE_AT:  '系统字段'
+2017-08-21 20:56:13,010 491  [main] INFO  org.wanwanframwork.file.Log - private long id;//
+private String code;//'模板编码'
+private String name;//'模板名'
+private String subject;//'通知主题'
+private String body;//'通知内容'
+private String type;//'通知类型(email,message)'
+private String systemCode;//'归属系统'
+private String isEnable;//'是否启用(0:未启用，1:启用)'
+private String hasAttachment;//'是否允许附件'
+private String createBy;//'系统字段'
+private Date createAt;//'系统字段'
+private String updateBy;//'系统字段'
+private Date updateAt;//'系统字段'
